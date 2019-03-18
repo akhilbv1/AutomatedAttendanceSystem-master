@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AutomatedAttendanceSystem</string>
+
+    <string name="file_provider_authority" translatable="false">com.projects.automatedattendancesystem.fileprovider</string>
+
+    <string name="open">Open Navigation Drawyer</string>
+
+    <string name="Close">Close Navigation Drawyer</string>
+
+    <string name="Error">Error Occurred,Please try again</string>
+</resources>
