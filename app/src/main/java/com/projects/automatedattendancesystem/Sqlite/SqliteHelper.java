@@ -657,7 +657,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()) {
             classesList.add(cursor.getString(cursor.getColumnIndex(Student.COLUMN_CLASS_NAME)));
-            Log.i("classname",cursor.getString(cursor.getColumnIndex(Student.COLUMN_CLASS_NAME)));
         }
         cursor.close();
         return classesList;
