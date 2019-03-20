@@ -650,27 +650,30 @@ public class SqliteHelper extends SQLiteOpenHelper {
         });
     }
 
-    public Single<Integer> setStudentSignedInRx(Class classPojo, List<String> classesList) {
+    private List<String> getStudentClassesList(Class classPojo) {
+        List<String> classesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.query(Student.TABLE_NAME, new String[]{"*"}, Student.COLUMN_STUD_ID + " =? ", new String[]{classPojo.getStudId()}, null, null, null);
+
+        while (cursor.moveToNext()) {
+            classesList.add(cursor.getString(cursor.getColumnIndex(Student.COLUMN_CLASS_NAME)));
+            Log.i("classname",cursor.getString(cursor.getColumnIndex(Student.COLUMN_CLASS_NAME)));
+        }
+        cursor.close();
+        return classesList;
+    }
+
+    public Single<Integer> setStudentSignedInRx(Class classPojo) {
         return Single.create(emitter -> {
             try {
+
                 int status = Utils.NORESULT;
                 // List<String> tableNames = new ArrayList<>();
                 SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
                 sqLiteDatabase.beginTransaction();
-               /* Cursor studentCursor = sqLiteDatabase.query(Student.TABLE_NAME, new String[]{"*"}, Student.COLUMN_STUD_ID + "=?", new String[]{classPojo.getStudId()}, null, null, null);
+               List<String> classesList = getStudentClassesList(classPojo);
 
-                if (studentCursor.moveToNext()) {
-                    String selectQuery = " SELECT DISTINCT " + Student.COLUMN_CLASS_NAME + " FROM " + Student.TABLE_NAME;
-                    Cursor classesCursor = sqLiteDatabase.rawQuery(selectQuery, null);
-                    if (classesCursor.moveToNext()) {
-                        do {
-                            String className = classesCursor.getString(classesCursor.getColumnIndex(Student.COLUMN_CLASS_NAME));
-                            tableNames.add(className);
-                        } while (classesCursor.moveToNext());
-                    }*/
                 if (classesList.size() > 0) {
-                    //   studentCursor.close();
-                    // classesCursor.close();
                     for (String tableName : classesList) {
                         Cursor cursor = sqLiteDatabase.query(tableName, new String[]{Class.COLUMN_CHECKIN_TIME}, Class.COLUMN_STUD_ID + "=? and " + Class.COLUMN_CHECKIN_DATE + "=?", new String[]{classPojo.getStudId(), classPojo.getCheckInDate()}, null, null, null);
                         if (cursor.getCount() == 0) {

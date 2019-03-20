@@ -193,7 +193,7 @@ public class UploadAttendanceFragment extends Fragment implements View.OnClickLi
             if (classList != null && classList.size() > 0) {
                 mProgressDialog.show();
 
-                sqliteHelper.setStudentSignedInRx(classPojo,classList).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                sqliteHelper.setStudentSignedInRx(classPojo).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new SingleObserver<Integer>() {
                             @Override
                             public void onSubscribe(Disposable d) {
@@ -205,9 +205,6 @@ public class UploadAttendanceFragment extends Fragment implements View.OnClickLi
                                 mProgressDialog.dismiss();
                                 if (integer == Utils.SUCCESS) {
                                       getcheckInMessage(currentTime);
-                                    //SendMessagePojo sendMessagePojo = sqliteHelper.getCheckInMessage(etStudentId.getText().toString().trim(), getTimeInHrs(currentTime));
-                                    // sendMessage(sendMessagePojo.getMessage(), sendMessagePojo.getPhoneNumber());
-                                    //sendCheckInOutMessage(sendMessagePojo.getMessage(), sendMessagePojo.getPhoneNumber());
                                     etStudentId.getText().clear();
                                     showStatus(integer, "CheckedIn Successfully");
                                 }

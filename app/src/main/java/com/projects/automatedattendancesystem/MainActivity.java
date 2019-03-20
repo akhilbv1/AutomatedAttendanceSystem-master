@@ -1,5 +1,6 @@
 package com.projects.automatedattendancesystem;
 
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -74,35 +75,32 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         final List<NavigationMenuPojo> menuList = new ArrayList<>();
-        menuList.add(new NavigationMenuPojo("Attedance", 1));
+        menuList.add(new NavigationMenuPojo("Attendance", 1));
         menuList.add(new NavigationMenuPojo("Report", 2));
         menuList.add(new NavigationMenuPojo("Settings", 3));
 
         NavigationMenuListAdapter navigationMenuListAdapter = new NavigationMenuListAdapter(this, menuList);
         lvMenu.setAdapter(navigationMenuListAdapter);
 
-        lvMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int positionId = menuList.get(i).getPosition();
-                drawyerLayout.closeDrawers();
-                switch (positionId) {
-                    case 1:
-                        replaceFragment(new UploadAttendanceFragment());
-                        getSupportActionBar().setDisplayShowHomeEnabled(false);
-                        getSupportActionBar().setTitle("Upload Attendance");
-                        break;
-                    case 2:
-                        replaceFragment(new GenerateReportFragment());
-                        getSupportActionBar().setDisplayShowHomeEnabled(false);
-                        getSupportActionBar().setTitle("Generate Report");
-                        break;
-                    case 3:
-                        replaceFragment(new SettingsFragment());
-                        getSupportActionBar().setDisplayShowHomeEnabled(false);
-                        getSupportActionBar().setTitle("Upload Data");
-                        break;
-                }
+        lvMenu.setOnItemClickListener((adapterView, view, i, l) -> {
+            int positionId = menuList.get(i).getPosition();
+            drawyerLayout.closeDrawers();
+            switch (positionId) {
+                case 1:
+                    replaceFragment(new UploadAttendanceFragment());
+                    getSupportActionBar().setDisplayShowHomeEnabled(false);
+                    getSupportActionBar().setTitle("Upload Attendance");
+                    break;
+                case 2:
+                    replaceFragment(new GenerateReportFragment());
+                    getSupportActionBar().setDisplayShowHomeEnabled(false);
+                    getSupportActionBar().setTitle("Generate Report");
+                    break;
+                case 3:
+                    replaceFragment(new SettingsFragment());
+                    getSupportActionBar().setDisplayShowHomeEnabled(false);
+                    getSupportActionBar().setTitle("Upload Data");
+                    break;
             }
         });
         replaceFragment(new UploadAttendanceFragment());

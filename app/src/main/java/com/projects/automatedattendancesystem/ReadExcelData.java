@@ -81,7 +81,7 @@ class ReadExcelData {
 
                          student.setSlNo(String.valueOf(slNo));
 
-                         student.setStud_Id(row1.getCell(1).getStringCellValue());
+                         student.setStud_Id(String.valueOf((long)row1.getCell(1).getNumericCellValue()));
 
                          student.setStud_Name(row1.getCell(2).getStringCellValue());
 
