@@ -28,28 +28,18 @@ public class Utils {
     public static final int ALREADYEXISTS = 5;
     public static final int NOCHECKINDATE = 6;
 
-    //error codes for creating tables
-    public static final int TABLECREATIONFAILED = 7;
-    public static final int TABLECREATIONSUCCESS = 8;
 
     //table exists or not
     public static final int TABLE_EXISTS = 9;
     public static final int TABLE_DOESNOT_EXISTS = 10;
 
-    public static final int NOSTUDENTSEXIST = 11;
+    static final int NOSTUDENTSEXIST = 11;
 
 
     //api key for teleo
-    public static final String SMS_API_KEY = "1vhKRku3pDk-GQnlto8GpUdT7bd5Uw6YLShZ05RqNj";
+    static final String SMS_API_KEY = "1vhKRku3pDk-GQnlto8GpUdT7bd5Uw6YLShZ05RqNj";
 
-    public static final String API_HASH = "363f2077832f811ad00a2dfd997aa85cb0cd4bfe80ea8b2d2ffa520c6d56386e";
 
-    public static String autoCapitalizeEntireWord(@NonNull String word) {
-        if (!TextUtils.isEmpty(word))
-            return word.toUpperCase();
-        else
-            return "";
-    }
 
     public static boolean checkAndRequestPermissions(Activity context, int PERMISSION_REQUEST_ID) {
         int permissionSendMessage = ContextCompat.checkSelfPermission(context,

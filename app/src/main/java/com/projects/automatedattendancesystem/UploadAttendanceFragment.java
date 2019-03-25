@@ -1,7 +1,6 @@
 package com.projects.automatedattendancesystem;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -70,12 +69,8 @@ public class UploadAttendanceFragment extends Fragment implements View.OnClickLi
     }
 
     private void initialiseViews(View view) {
-        //  Button btnCheckIn = view.findViewById(R.id.btnCheckin);
-        // Button btnCheckout = view.findViewById(R.id.btnCheckout);
-        etStudentId = view.findViewById(R.id.etStudentId);
 
-        // btnCheckIn.setOnClickListener(this);
-        // btnCheckout.setOnClickListener(this);
+        etStudentId = view.findViewById(R.id.etStudentId);
 
         Button btnSubmit = view.findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(this);
@@ -83,11 +78,6 @@ public class UploadAttendanceFragment extends Fragment implements View.OnClickLi
         Button btnSendMessage = view.findViewById(R.id.btnSend);
         btnSendMessage.setOnClickListener(this);
 
-        Button btnMultiple = view.findViewById(R.id.btnMultiple);
-        btnMultiple.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(), MultiChecksActivity.class);
-            startActivity(intent);
-        });
     }
 
     @Override
@@ -217,33 +207,6 @@ public class UploadAttendanceFragment extends Fragment implements View.OnClickLi
                                 Toast.makeText(getActivity(), R.string.Error, Toast.LENGTH_SHORT).show();
                             }
                         });
-/*
-                sqliteHelper.setStudentCheckedInRx(classPojo).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new SingleObserver<Integer>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                compositeDisposable.add(d);
-                            }
-
-                            @Override
-                            public void onSuccess(Integer integer) {
-                                if (integer == Utils.SUCCESS) {
-                                    getcheckInMessage(currentTime);
-                                    //SendMessagePojo sendMessagePojo = sqliteHelper.getCheckInMessage(etStudentId.getText().toString().trim(), getTimeInHrs(currentTime));
-                                    // sendMessage(sendMessagePojo.getMessage(), sendMessagePojo.getPhoneNumber());
-                                    //sendCheckInOutMessage(sendMessagePojo.getMessage(), sendMessagePojo.getPhoneNumber());
-                                }
-                                etStudentId.getText().clear();
-                                mProgressDialog.dismiss();
-                                showStatus(integer, "CheckedIn Successfully");
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                mProgressDialog.dismiss();
-                                Toast.makeText(getActivity(), R.string.Error, Toast.LENGTH_SHORT).show();
-                            }
-                        });*/
 
 
             } else {
@@ -335,7 +298,7 @@ public class UploadAttendanceFragment extends Fragment implements View.OnClickLi
                             @Override
                             public void onSuccess(Integer integer) {
                                 if (integer == Utils.SUCCESS) {
-                                    SendMessagePojo sendMessagePojo = sqliteHelper.getCheckOutMessage(etStudentId.getText().toString().trim(), getTimeInHrs(currentTime), false);
+                                    SendMessagePojo sendMessagePojo = sqliteHelper.getCheckOutMessage(etStudentId.getText().toString().trim(), getTimeInHrs(currentTime));
                                     sendMessage(sendMessagePojo.getMessage(), sendMessagePojo.getPhoneNumber());
                                     //sendCheckInOutMessage(sendMessagePojo.getMessage(), sendMessagePojo.getPhoneNumber());
                                 }

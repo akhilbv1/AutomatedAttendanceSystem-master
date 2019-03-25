@@ -4,18 +4,13 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.projects.automatedattendancesystem.Pojo.ReportPojo;
-import com.projects.automatedattendancesystem.Tables.Student;
-
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,84 +19,12 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import io.reactivex.Single;
 
 import static org.apache.poi.ss.usermodel.CellStyle.VERTICAL_TOP;
 
-public class WriteExcelData {
-/*
-    public static final String COLUMN_SlNO = "SlNo";
-    public static final String COLUMN_STUD_ID = "Stud_Id";
-    public static final String COLUMN_STUD_NAME = "Stud_Name";
-    public static final String COLUMN_FATHER_NAME = "Father_Name";
-    public static final String COLUMN_CLASS_NAME = "Class_Name";*/
+class WriteExcelData {
 
-    public static Integer generateExeclReport(String filename, List<Student> studentList) {
-
-        Workbook workbook;
-
-        if (filename.endsWith("xlsx")) {
-            workbook = new XSSFWorkbook();
-        } else if (filename.endsWith("xls")) {
-            workbook = new HSSFWorkbook();
-        } else {
-            return Utils.FAILURE;
-        }
-
-        Sheet sheet = workbook.createSheet("Attendance_Report");
-
-        int rowIndex = 0;
-        Row row = sheet.createRow(0);
-
-        Cell cell_SLNo = row.createCell(1);
-        cell_SLNo.setCellValue("SLNO");
-
-        Cell cell_StudId = row.createCell(1);
-        cell_StudId.setCellValue("Student_Id");
-
-        Cell cell_StudentName = row.createCell(2);
-        cell_StudentName.setCellValue("StudentName");
-
-        Cell cell_FatherName = row.createCell(3);
-        cell_FatherName.setCellValue("FatherName");
-
-        Cell cell_ClassName = row.createCell(4);
-        cell_ClassName.setCellValue("ClassName");
-
-        for (int i = 0; i < studentList.size(); i++) {
-            Student obj = studentList.get(i);
-            row = sheet.createRow(i + 1);
-            Cell cell_Value_SLNo = row.createCell(1);
-            cell_Value_SLNo.setCellValue(i);
-
-            Cell cell_Value_StudId = row.createCell(1);
-            cell_Value_StudId.setCellValue(obj.getStud_Id());
-
-            Cell cell_Value_StudentName = row.createCell(2);
-            cell_Value_StudentName.setCellValue(obj.getStud_Name());
-
-            Cell cell_Value_FatherName = row.createCell(3);
-            cell_Value_FatherName.setCellValue(obj.getFather_Name());
-
-            Cell cell_Value_ClassName = row.createCell(4);
-            cell_Value_ClassName.setCellValue(obj.getClass_Name());
-        }
-       /* File file = new File(Environment.getExternalStorageDirectory() + File.separator + filename);
-
-        FileOutputStream fileOutputStream = null;
-        try {
-            file.createNewFile();
-            fileOutputStream = new FileOutputStream(file);
-            workbook.write(fileOutputStream);
-            fileOutputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Utils.FAILURE;
-        }*/
-
-        return saveExcelFile(filename, workbook);
-    }
 
     static Single<Integer> generateExcelReportRx(String filename, List<ReportPojo> reportsLists, List<String> datesList) {
         return Single.create(emitter -> {
@@ -120,7 +43,7 @@ public class WriteExcelData {
         });
     }
 
-    public static Integer generateExcelReport(String filename, List<ReportPojo> reportsLists, List<String> datesList) {
+    static Integer generateExcelReport(String filename, List<ReportPojo> reportsLists, List<String> datesList) {
 
         Workbook workbook;
         Map<String, Integer> dateMap = new HashMap<>();
@@ -135,7 +58,6 @@ public class WriteExcelData {
 
         Sheet sheet = workbook.createSheet("Attendance_Report");
 
-        int rowIndex = 0;
         Row row = sheet.createRow(0);
 
 
@@ -208,6 +130,7 @@ public class WriteExcelData {
         return saveExcelFile(filename, workbook);
     }
 
+    @SuppressWarnings("ALL")
     private static int saveExcelFile(String fileName, Workbook workbook) {
         try {
 

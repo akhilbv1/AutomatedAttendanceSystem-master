@@ -8,7 +8,7 @@ public class Preferences {
 
     public static String SCHOOL_NAME = "Automated Attendance System";
 
-    public static void savePreferences(Context context){
+    static void savePreferences(Context context){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -16,7 +16,7 @@ public class Preferences {
         editor.apply();
     }
 
-    public static void loadPreferences(Context context){
+    static void loadPreferences(Context context){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SCHOOL_NAME = preferences.getString("SchoolName","");
     }

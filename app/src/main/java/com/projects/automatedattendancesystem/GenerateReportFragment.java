@@ -92,13 +92,6 @@ public class GenerateReportFragment extends Fragment implements AdapterView.OnIt
         return view;
     }
 
-    private void askPermissions() {
-        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getActivity(), "This App has required permissions", Toast.LENGTH_SHORT).show();
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), perms, PERMISSSIONS_REQ_CODE);
-        }
-    }
 
 
     private void getClassesList() {
@@ -533,7 +526,6 @@ public class GenerateReportFragment extends Fragment implements AdapterView.OnIt
                         reportPojo.setStud_Name(studentPojo.getStud_Name());
                         reportPojo.setFather_Name(studentPojo.getFather_Name());
                         reportPojo.setClass_Name(studentPojo.getClass_Name());
-                        // List<Class> attendanceList = sqliteHelper.getStudentAttendanceList(className, studentPojo.getStud_Id(), fromDateInSec, toDateInSec, isLast);
                         if (sqliteHelper.CheckIfTableExists(className) == Utils.TABLE_EXISTS) {
                             reportPojo.setAttendanceList(sqliteHelper.getStudentAttendanceList(className, studentPojo.getStud_Id(), fromDateInSec, toDateInSec, isLast));
                             reports.add(reportPojo);

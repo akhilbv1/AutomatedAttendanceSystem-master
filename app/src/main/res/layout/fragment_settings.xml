@@ -199,19 +199,7 @@
                 android:orientation="horizontal">
 
 
-                <Button
-                    android:id="@+id/btnClear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/button_background"
-                    android:layout_marginTop="5dp"
-                    android:padding="10dp"
-                    android:visibility="gone"
-                    android:text="Clear" />
+
                 <Button
                     android:id="@+id/btnBrowseXls"
                     android:layout_width="wrap_content"

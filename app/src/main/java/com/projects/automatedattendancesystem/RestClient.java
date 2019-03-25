@@ -1,8 +1,5 @@
 package com.projects.automatedattendancesystem;
 
-import java.io.IOException;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -11,20 +8,13 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class RestClient {
-
-
-    //private static String BASE_URL = "https://api.textlocal.in/";
+class RestClient {
 
     private static String BASE_URL = "http://202.143.96.85/websms/";
 
-    private static String BaseUrl_getEvents = "";
-
-    private Retrofit retrofit = null;
-
     private final RestApi restApi;
 
-    public RestClient(){
+    RestClient(){
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // set your desired log level
@@ -50,18 +40,15 @@ public class RestClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
-;
+
 
         restApi = retrofit.create(RestApi.class);
 
 
     }
 
-    public RestApi getRestApi(){
+    RestApi getRestApi(){
         return restApi;
     }
-
-
-
 
 }

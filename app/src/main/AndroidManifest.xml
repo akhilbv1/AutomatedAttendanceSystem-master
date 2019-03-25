@@ -21,8 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MultiChecksActivity"/>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="@string/file_provider_authority"

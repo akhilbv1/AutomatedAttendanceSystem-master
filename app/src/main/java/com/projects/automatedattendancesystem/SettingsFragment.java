@@ -88,31 +88,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         btnSaveSchl.setOnClickListener(this);
         btnSaveXls.setOnClickListener(this);
 
-        Button btnClear = view.findViewById(R.id.btnClear);
-        btnClear.setOnClickListener(this::clearDataBase);
     }
 
-    private void clearDataBase(View view) {
-        sqliteHelper.dropAllTables().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Integer>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
 
-                    @Override
-                    public void onSuccess(Integer integer) {
-                        Toast.makeText(getActivity(), "Database has been cleared", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getActivity(), R.string.Error, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-    }
 
     private void passwordDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_password, null);
